@@ -39,8 +39,7 @@ pitch ideas to solve problems.
 docs/fles, store the diferent versions of the project,
 organize reference materials etc.
 17. Automatically pay the employees based on the amount
-of work they do.18.
-19.
-Create a separate tool for handling the clients of the
+of work they do.
+18. Create a separate tool for handling the clients of the
 company.
-Manage the contacts of clients.
+19. Manage the contacts of clients.
