@@ -1,0 +1,57 @@
+{% extends 'homepage.html' %}
+
+{% block content %}
+
+
+    <center>
+        <h3 class="display-4" style="font-size:40px;color:white;font-weight:400;">My Assignments</h3><hr>
+    </center>
+    <div class="container" style="border-radius: 20px;padding: 25px;">
+
+
+        <table class="table table-striped">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Title</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Due Date</th>
+                <th scope="col">Time of Submission</th>
+                <th scope="col"></th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in all_tasks %}
+                <tr style="background-color:white">
+                    {% if task.done == False %}
+
+                        <th scope="row" style="font-weight: 600">
+                            <i class="fa fa-circle" style="color: red"></i>&nbsp; {{ task.title }}</th>
+                    {% elif task.done %}
+                        <th scope="row" style="font-weight: 600">
+                            <i class="fa fa-circle" style="color: green"></i>&nbsp;{{ task.title }}</th>
+                    {% endif %}
+
+
+                    <td>{{ task.project_name }}</td>
+                    <td>{{ task.due_date }}</td>
+                    <td>{{ task.time_of_submission }}</td>
+
+
+                    {% if task.done == False %}
+
+                        <td><a class="btn btn-primary" href="{% url 'assignments:update_task' task.id %}" role="button">
+                            <i class="fa fa-edit"></i>Done</a></td>
+                    {% elif task.done %}
+                        <td><a class="btn btn-primary" href="{% url 'assignments:delete_task' task.id %}" role="button">
+                            <i class="fa fa-trash"></i>delete</a></td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+
+1. API ENDPOINT url(uri)[ Resources]
+
+    What all services our api provides
+  -CRUD Create Retrieve, Update, Delete
+  -List and search
+
+2. HTTP methods  (Client side request protocols)
+  -GET ,POST, PUT, PATCH , DELETE
+
+3. Data Types and Validation
+
+    - JSON   ->serializer
+
+    - Validation ->serializer

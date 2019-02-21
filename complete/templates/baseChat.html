@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" href="{% static "css/style1.css" %}" type="text/css" media="screen" />
+	<script src="{% static "js/jquery-1.12.2.min.js" %}" type="text/javascript"></script>
+	<script src="{% static "js/reconnecting-websocket.min.js" %}" type="text/javascript"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+  crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'accounts\styles.css' %}" type ="text/css">
+  <meta name='viewport' content="width=device-width,initial-scale=1.0 ">
+	{% block extra_head %}{% endblock %}
+</head>
+<body>
+  <br>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="navbar-header">
+    <a class="navbar-brand" href="/">Kickstart</a>
+  </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbar">
+      {% if user.is_authenticated %}
+          <ul class="navbar-nav mr-auto">
+              <li><a class="nav-link" href="/accounts/">Home <span class="fa fa-home"></span></a></li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+          <li><a class="nav-link" href='/accounts/profile'>Profile <span class="fa fa-user"></span></a></li>
+
+            <li><a class="nav-link" href='/accounts/logout'>Logout <span class="fa fa-sign-out-alt"></span></a></li>
+          </ul>
+          {% else %}
+          <ul class="navbar-nav mr-auto">
+              <li><a class="nav-link" href="/accounts/index">Home <span class="fa fa-home"></span></a></li>
+          </ul>
+                      <ul class="navbar-nav ml-auto">
+              <li><a class="nav-link" href='/accounts/login'>Login <span class="fa fa-sign-in-alt"></span></a></li>
+            <li><a class="nav-link" href="/accounts/inter_reg">Register <span class="fa fa-user-plus"></span></a></li>
+          </ul>
+          {% endif %}
+      </div>
+
+    </nav>
+<br><br>
+	<section>
+		{% block content %}
+		{% endblock %}
+	</section>
+	{% block extra_body %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'homepage.html' %}
+
+{% block content %}
+
+
+    <center xmlns="http://www.w3.org/1999/html">
+        <h3 class="display-4" style="color:white;">My To dos</h3>
+        <a style="alignment-baseline: after-edge;" href="{% url 'assignments:add_todo' %}" role="button">
+            <button type="button" class="btn btn-primary" style="background-color: #6d7fcc;">Add Todo <i class="fa fa-edit"></i></button>
+
+        </a>
+        </a>
+    </center>
+
+    <div class="container" style="border-radius: 20px;padding: 25px;">
+
+
+        <table class="table table-striped" style="color: white;font-size:20px;">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">Todo</th>
+                <th scope="col">deadline</th>
+                <th scope="col" align="center"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for todo in all_todo %}
+
+                <tr style="background-color:white;">
+                    {% if todo.done == False %}
+                        <th  scope="row" style="font-weight: 600">
+                            <i class="fa fa-circle" style="color: red"></i>&nbsp;{{ todo.title }}</th>
+                    {% elif todo.done %}
+                        <th scope="row"style="font-weight: 600">
+                            <i class="fa fa-circle" style="color: green"></i>&nbsp;{{ todo.title }}</th>
+                    {% endif %}
+                    <td >{{ todo.due_date }}</td>
+                    {% if todo.done == False %}
+
+                        <td align="center"><a class="btn btn-primary" href="{% url 'assignments:update_todo' todo.id %}" role="button">
+                            <i class="fa fa-edit"></i>
+                            Done</a></td>
+                    {% elif todo.done%}
+                        <td align="center"><a class="btn btn-primary" href="{% url 'assignments:delete_todo' todo.id %}" role="button">
+                            <i class="fa fa-trash"></i>delete</a></td>
+                    {% endif %}
+
+
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

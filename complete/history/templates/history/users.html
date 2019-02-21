@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-light" style="background-color: #560D90;">
+  <a class="navbar navbar-brand" href="#" style="color : #ffffff">
+  Bootstrap
+  </a>
+  <a href="#" class = "navbar navbar-brand"><img src="static/images/profiles.jpg" class  = "image-fluid" style="length : 20px; width : 20px;"></a>
+
+</nav>
+    <div class="container">
+      <br>
+      <center><h1 class="display-4" style="color:white">My recent activities</h1></center>
+        <br>
+        <div class="jumbotron">
+      {% if trials%}
+      <ol>
+        {% for each in trials %}
+         {% if each.emp_id == 'manasa' %}
+        <ul>
+          <center>
+          <div class="card" style="width: 70%;">
+        <div class="card-body">
+
+            <h5 class="card-title">{{each.dates}} , {{each.times}}</h5>
+          <center>
+          <p class="card-text">
+            <b>{{each.emp_id}}</b> completed the task of <b>{{each.task_done}}</b>
+        </div>
+      </div>
+    </center>
+        <!---  <li>task : {{each.task_done}}</li>
+          <li>date : {{each.date}}</li>
+          <li>time : {{each.time}}</li>-->
+        </ul>
+        {% endif %}
+        {% endfor %}
+      </ol>
+      {% else %}
+       <h3>No recent activities yet :(</h3>
+      {% endif %}
+    </div>
+  </div>
+  </body>
+</html>

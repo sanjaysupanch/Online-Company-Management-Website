@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+  {% block head %}
+
+  <title>Home</title>
+  <style>
+    a:hover, a = {
+      text-decoration=none;
+    }
+    </style>
+  {% endblock %}
+
+  {% block body %}
+  <br><br><br>
+
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title"> Create team here  </h4>
+          <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- Modal body -->
+        <div class="modal-body">
+          <div class="container">
+            <form method="post">
+              {% csrf_token %}
+              {{form.as_p}}
+              <button type="submit">Create team</button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div class="container" style="color:white;font-size:25px;">
+    <br>
+    <br>
+    {{message}}
+    <br>
+    <br>
+  </div>
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-3">
+              <div class="display-3" style="color:white;">
+                  Teams
+              </div>
+          </div>
+          <div class="col-lg-3" style="margin-top:auto;">
+
+                  <button class="btn btn-info" data-toggle="modal" data-target="#myModal"
+                          style="background-color:teal;">
+                      Create team <span class="fa fa-plus-circle"></span></button>
+            
+          </div>
+          <div class="col-lg-3" style="margin-top:auto;">
+            <a href="{% url 'list_activities' %}">
+                <button class="btn btn-info"
+                        style="background-color:teal;margin-top:10px;">
+                    Recent activities
+                </button>
+            </a>
+          </div>
+          <div class="col-lg-3" style="margin-top:auto;">
+            <a href="{% url 'put_calendar:events' %}"><button type="button" class="btn btn-primary" style="background-color: teal;margin-top:5px;">Create event</button></a>
+          </div>
+      </div>
+      <hr style="border-color:darkgray;">
+
+
+    <div class="row">
+
+    {% for eachgrp in groups %}
+    <div class="col-lg-3" style="padding: 5px;">
+        <div class="text-center">
+            <image src="{% static 'images/team.png' %}"
+                   style="height:auto;width:45%;alignment: center;"></image>
+            <br><br>
+            <a href="{% url 'view_group_with_pk' pk=eachgrp.team_details.pk %}"
+               style="text-decoration:none;">
+                <button type="button" class="btn btn-primary"
+                        style="background-color: teal;color:white;">{{ eachgrp.team_details }}</button>
+            </a>
+        </div>
+    </div>
+
+
+
+    {% endfor %}
+
+    </div>
+
+  </div>
+  {% endblock %}

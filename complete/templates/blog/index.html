@@ -1,0 +1,44 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <style>
+        a, a:hover {
+            color: #3e3e3e;
+            text-decoration: none;
+        }
+    </style>
+
+{% endblock head %}
+
+{% block body %}
+    <br><br><br>
+
+
+    <p class="text-center">
+        <a href="{% url 'newpost' pk=team.pk %}" class="btn btn-warning" role="button"
+           style="border-radius: 20px;color: white;background-color: #d43e3e;border-color: #d43e3e;">Add
+            new post <span class="fa fa-plus-circle"></span></a>
+    </p>
+    {% if posts %}
+        {% for post in posts %}
+            <div class="shadow-lg p-4 mb-4" style="background-color: #f7f7f7;color: #373737;width:70%;margin-left: 15%;">
+                <div class="media">
+                    <img src="{% static 'images/default.png' %}" class="align-self-start mr-3 rounded-circle"
+                         style="width:60px">
+                    <div class="media-body">
+                        <p><span class="font-italic"><small> posted by</small></span><span
+                                > {{ post.author }} </span><br><span class="font-italic"><small>{{ post.timestamp|date:"g:i A, d M, y" }}</small></span>
+                        </p>
+                        <hr style="border-color: #5d5c5c94;margin: 0px">
+                        <h1 class="display-4" style="font-size: 37px;"><a href="{% url 'details' pk=post.pk %}">{{ post.title }}</a></h1>
+                        <p style="font-size:large;">{{ post.content }}</p>
+                        <a href="{% url 'details' pk=post.pk %}">Comments <span class="badge badge-pill badge-primary"
+                                                                                style="background-color: #d43e3e">{{ post.comment_set.count }}</span></a>
+                    </div>
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

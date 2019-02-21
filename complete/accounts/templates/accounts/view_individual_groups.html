@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <style>
+        a, a:hover {
+            text-decoration: none;
+            color: black;
+        }
+
+        .btn-primary {
+            border-color: #ffffff00;
+        }
+    </style>
+    <title>GROUP PAGE</title>
+{% endblock %}
+
+{% block body %}
+    <br><br><br>
+
+    <!-- The Modal -->
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title"> Add a member to the group </h4>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+
+                            <button type="submit">Add member</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+    <div class="row">
+        <div class="col-lg-8" style="padding-left: 50px;">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="text-center">
+                        <image src="{% static 'images/checklist.png' %}" style="height: 150px;width:auto;"></image>
+                        <br><br>
+                        <a href="{% url 'accounts.todo' pk=team.pk %}">
+                            <button type="button" class="btn btn-primary" style="background-color: #d2324b;">To-do
+                                list
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="text-center">
+                        <image src="{% static 'images/chat.png' %}" style="height: 150px;width:auto;"></image>
+                        <br><br>
+                        <a href="{% url 'chat.group' pk=team.pk %}">
+                            <button type="button" class="btn btn-primary" style="background-color: #379bbd;">
+                                Group-chat
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="text-center">
+                        <image src="{% static 'images/thread.png' %}" style="height: 150px;width:auto;"></image>
+                        <br><br>
+                        <a href="{% url 'blog_index' pk=team.pk %}">
+                            <button type="button" class="btn btn-primary" style="background-color: #252c3c;">Thread
+                                based discussions
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <br><br><br>
+
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="text-center">
+                        <image src="{% static 'images/folder.png' %}" style="height: 150px;width:auto;"></image>
+                        <br><br>
+                        <a href="{% url 'file_upload' pk=team.pk %}">
+                            <button type="button" class="btn btn-primary" style="background-color: #e2a547;">File
+                                sharing
+                            </button>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="text-center">
+                        <image src="{% static 'images/calendar.png' %}" style="height: 150px;width:auto;"></image>
+                        <br><br>
+                        <a href="{% url 'put_calendar:group_index' %}">
+                            <button type="button" class="btn btn-primary" style="background-color: #2e93a1;">Calendar
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="shadow-lg p-0 mb-4 bg-transparent">
+                <div class="card" style="background-color: #000000b5;color: #dfe2e8;">
+
+                    <div class="card-body">
+                        <div class="container">
+                            {{ message }}
+                        </div>
+
+                        <h3 class="display-4" style="font-size: 30px;font-weight: 400;">Members
+                            <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal"
+                                    style="background-color:teal;margin-bottom: inherit;margin-left: 75px;">Add <span
+                                    class="fa fa-plus-circle"></span></button>
+                                    <a href="{% url 'put_calendar:groups' %}"><button type="button" class="btn btn-primary btn-sm" style="background-color:teal;margin-bottom:8px;">Create event</button></a>
+                        </h3>
+                        <hr style="border-color: #7d8086;">
+                        {% for mem in members %}
+                            <span style="font-size: 19px;">{{ mem.user_name.username }}<span><br>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

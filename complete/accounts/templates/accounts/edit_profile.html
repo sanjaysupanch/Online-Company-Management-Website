@@ -1,0 +1,46 @@
+{% extends 'homepage.html' %}
+
+{% block head %}
+    <title>EDIT PROFILE PAGE</title>
+    <style>
+        .form-control {
+            width: 40%;
+        }
+    </style>>
+{% endblock %}
+
+{% block content %}
+    <script type="text/javascript">
+        $(function () {
+
+            $("#id_email").addClass("form-control");
+            $("#id_first_name").addClass("form-control");
+            $("#id_last_name").addClass("form-control");
+            $("#id_phone").addClass("form-control");
+            $("#id_city").addClass("form-control");
+        });
+    </script>
+    <br><br>
+    <div class="card">
+        <div class="card-body">
+            <h1 class="display-4" style="font-size:35px;font-weight:400;">Edit Profile:</h1><br>
+            <div class="container" style="width:50%;">
+                <form method="post">
+                    {% csrf_token %}
+                    First name: {{ form.first_name }}
+                    Last name: {{ form.last_name }}
+                    Email: {{ form.email }}
+                    <br>
+                    Phone: {{ form1.phone }}
+                    City: {{ form1.city }}
+                    <button type="submit">Submit</button>
+
+                </form>
+                <br>
+                <a class="nav-link" href='/accounts/change-password'>
+                    <button type="button" class="btn btn-danger">Change password</button>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

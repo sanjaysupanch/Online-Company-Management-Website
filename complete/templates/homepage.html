@@ -1,0 +1,168 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>dashboard</title>
+
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <!-- Our Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+</head>
+
+<body style="background-image:url('{% static 'images/13390.jpg' %}');background-size:cover; background-repeat:no-repeat;">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="navbar-header">
+      <a class="navbar-brand" href="/">Kickstart</a>
+    </div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-auto">
+                <li><a class="nav-link" href="/accounts/">Home <span class="fa fa-home"></span></a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+            <li><a class="nav-link" href='/accounts/profile'>Profile <span class="fa fa-user"></span></a></li>
+
+              <li><a class="nav-link" href='/accounts/logout'>Logout <span class="fa fa-sign-out-alt"></span></a></li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav">
+              <li><a class="nav-link" href='/accounts/reset-password'>Reset Password</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+              <li><a class="nav-link" href='/accounts/login'>Login <span class="fa fa-sign-in-alt"></span></a></li>
+              <li><a class="nav-link" href="/accounts/inter_reg">Register <span class="fa fa-sign-in-alt"></span></a></li>
+            </ul>
+            {% endif %}
+        </div>
+
+      </nav>
+
+<br><br><br>
+
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>{{ request.user }}</h3>
+            </div>
+
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fa fa-user"></i>
+                        My Profile
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="{% url 'view_profile' %}">View Profile</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'edit_profile' %}">Edit Profile</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'history:trials' %}">
+                        <i class="fas fa-briefcase"></i>
+                        My Recent Activity
+                    </a>
+                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <i class="fas fa-copy"></i>
+                        My Task and Assignments
+                    </a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li>
+                            <a href="{% url 'assignments:display' %}">My Assignments</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'assignments:my_todo' %}">self assigned tasks</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'notifications:index' %}">
+                        <i class="fas fa-bell"></i>
+                        Notifications
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'put_calendar:index' %}">
+                        <i class="fas fa-calendar"></i>
+                        calendar
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'clients:index' %}">
+                        <i class="fas fa-address-book"></i>
+                        Client List
+                    </a>
+                </li>
+            </ul>
+
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <i class="fas fa-align-justify"></i>
+                    </button>
+
+
+                </div>
+                            <h2 class="display-4" style="font-size:50px;">Personal Dashboard</h2>
+
+            </nav>
+
+
+{% block content %}
+{% endblock content %}
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+
+
+    {% block content1 %}
+
+{% endblock content1 %}
+
+</body>
+</html>

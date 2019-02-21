@@ -1,0 +1,46 @@
+{% extends 'homepage.html' %}
+
+
+{% block content %}
+        <div class="container" style="border-radius: 20px;padding: 25px;">
+
+
+<center>
+    <h3 style="color: white" class="display-4">Notifications</h3><hr>
+</center>
+
+
+  {% if latest.message %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+
+    <strong>{{ latest.message }}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+  {% endif %}
+  </div>
+
+  {% if rev_all  %}
+  <ul class="list-group">
+
+  {% for item in rev_all %}
+      {% if item.read %}
+            <li class="list-group-item disabled">{{ item.message }} </li>
+      {% elif item.read == False %}
+
+             <li class="list-group-item">{{ item.message }}
+                 <a style="float: right" class="btn btn-outline-primary" href="{% url 'notifications:update' item.id %}" role="button">
+                     <i class="fa fa-eye"></i>
+                     mark as read</a>
+             </li>
+      {% endif %}
+  {% endfor %}
+</ul>
+
+  {% else %}
+            <h3 class="display-4" style="color:white;font-size:30px;">no notifications</h3>
+  {% endif %}
+
+
+        </div>
+{% endblock content%}

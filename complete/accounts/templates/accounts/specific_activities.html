@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% endblock head %}
+
+
+{% block body %}
+    <br><br>
+    <div class="container">
+        <h1 class="display-4" style="color:white;">{{ user.username }}'s recent activity</h1>
+        <br>
+
+
+
+        {% if trials %}
+
+            {% for each in trials %}
+
+                <div class="card" style="width: 70%;">
+                    <div class="card-body">
+
+                        <h5 class="card-title">{{ each.dates }} , {{ each.times }}</h5>
+
+                        <p class="card-text">
+                            <b>{{ each.emp_id }}</b> completed the task of <b>{{ each.task_done }}</b>
+                    </div>
+                </div>
+                <!---  <li>task : {{each.task_done}}</li>
+                                    <li>date : {{each.date}}</li>
+                                    <li>time : {{each.time}}</li>-->
+            {% endfor %}
+
+        {% else %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="display-4" style="font-size:30px;">No Recent Activity yet.</h3>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock body %}

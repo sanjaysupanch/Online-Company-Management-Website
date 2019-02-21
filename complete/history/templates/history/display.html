@@ -1,0 +1,40 @@
+{% extends 'homepage.html' %}
+
+{% block content1 %}
+{% endblock content1 %}
+
+
+{% block content %}
+
+    <div class="container">
+      <br>
+     <h1 class="display-4" style="color:white">My recent activity</h1>
+        <br>
+        <div class="jumbotron">
+      {% if trials%}
+      <ol>
+        {% for each in trials %}
+        <ul>
+
+          <div class="card" style="width: 70%;">
+        <div class="card-body">
+
+            <h5 class="card-title">{{each.dates}} , {{each.times}}</h5>
+
+          <p class="card-text">
+            <b>{{each.emp_id}}</b> completed the task of <b>{{each.task_done}}</b>
+        </div>
+      </div>
+
+        <!---  <li>task : {{each.task_done}}</li>
+          <li>date : {{each.date}}</li>
+          <li>time : {{each.time}}</li>-->
+        </ul>
+        {% endfor %}
+      </ol>
+      {% else %}
+       <h3>No Recent Activity yet.</h3>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

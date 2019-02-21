@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block head %}
+    <title>Create Team </title>
+{% endblock %}
+
+{% block body %}
+    <script type="text/javascript">
+        $(function () {
+
+            $("#id_title").addClass("form-control");
+            $("#id_deadline").addClass("form-control");
+            $("#id_project_name").addClass("form-control");
+            $("#id_description").addClass("form-control");
+            $("#id_user_assign").addClass("form-control");
+            $("#id_user_notify").addClass("form-control");
+        });
+    </script>
+
+    <br><br><br>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="card" style="width:580px;margin-left:25px;">
+                <div class="card-body">
+                    <h2 class="display-4">To do </h2>
+                    <form method="post">
+                        {% csrf_token %}
+                        Title: {{ form.title }}<br>
+                        Project name: {{ form.project_name }}<br>
+                        Description: {{ form.description }}<br>
+                        <div class="row">
+                            <div class="col-lg-3">
+
+                        {{ form1.as_p }}
+                            </div>
+                            <div class="col-lg-3">
+                        {{ form2.as_p }}
+                                </div>
+                            <div class="col-lg-3">
+                                Deadline: {{ form.deadline }}
+                            </div>
+                        </div>
+                        <br>
+                            <button type="submit" class="btn btn-danger" style="background-color: #d2324b;">Add a to do</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-body">
+                <p class="text-center">
+                    <h3 class="display-4" style="font-size: 30px;font-weight:400;">Lists of Things to do</h3>
+                </p>
+                <hr style="border-color: #8b8e94">
+
+                    {% for list in alllist %}
+                        <span style="font-size: 19px;">{{ list.title }}</span>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,91 @@
+/**
+ * ALL the UI design credit goes to:
+ * https://www.sketchappsources.com/free-source/2676-calendar-template-sketch-freebie-resource.html
+ */
+
+
+/* WRAPPER */
+
+
+main {
+  grid-area: content;
+  padding: 48px;
+}
+/* MAIN */
+
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+
+.calendar__week,
+.calendar__header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+.calendar__week {
+  grid-auto-rows: 100px;
+  text-align: right;
+}
+
+.calendar__header {
+  grid-auto-rows: 50px;
+  align-items: center;
+  text-align: center;
+}
+
+
+
+.calendar__day {
+  padding: 16px;
+}
+
+/* COSMETIC STYLING */
+
+:root {
+  --red: #ED5454;
+}
+
+body {
+  font-family: Montserrat;
+  font-weight: 100;
+  color: #000000;
+}
+
+
+main {
+  background-color: #FCFBFC;
+  color:#000000;
+}
+
+
+
+.calendar {
+  background-color: white;
+  border: 1px solid #e1e1e1;
+  color: #000000;
+}
+
+.calendar__header > div {
+  text-transform: uppercase;
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+.calendar__day {
+  border-right: 1px solid #e1e1e1;
+  border-top: 1px solid #e1e1e1;
+}
+
+.calendar__day:last-child {
+  border-right: 0;
+}
+
+
+h3
+{
+  color : #000000;
+}

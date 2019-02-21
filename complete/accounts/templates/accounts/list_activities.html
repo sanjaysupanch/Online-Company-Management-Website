@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+    <title>list activities</title>
+{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    <div class="container">
+        <div class="display-4" style="color:white;font-size:50px;">
+            Employee's activities
+        </div>
+    </div>
+    <hr style="border-color: #8b8e94;">
+    <br>
+    <div class="row" style="margin-left: 3.5%;">
+
+        {% for user in users %}
+            <div class="col-lg-2">
+                <div class="text-center">
+                    <image src="{% static 'images/profile.png' %}" style="height:auto;width:60%;"></image>
+                    <br><br>
+                    <a href="{% url 'specific_activities' pk=user.user.pk %}">
+                        <button class="btn btn-success">{{ user }}</button>
+                    </a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

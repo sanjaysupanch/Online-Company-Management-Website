@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block head %}
+  <title>EDIT PROFILE PAGE</title>
+{% endblock %}
+
+{% block body %}
+<script type="text/javascript">
+  $(function(){
+
+      $("#id_uploadd").addClass("form-control");
+
+});
+</script>
+<br><br><br>
+<br><br><br>
+
+<div class="container">
+      <div class="display-3" style="color:white;">
+        Shared Files
+      </div>
+      <hr style="border-color:white;">
+      <br>
+
+      <div class="row">
+
+      {% for  i in files %}
+      <div class="col-lg-4" style="padding:9px;">
+        <div class="text-center">
+        <image src="{% static 'images/documents.png' %}" style="height: 150px;width:auto;"></image><br>
+         <a href="{% url 'file_download' pk=i.pk %}"><button type="button" class="btn btn-warning" style="background-color:#e2a547;color:white;">{{i.filename}} <span class="fa fa-cloud-download-alt"></span></button></a>
+       </div>
+      </div>
+      {% endfor %}
+
+    </div>
+</div>
+
+<div class="card" style="position:fixed;bottom:7px;right:0px;">
+  <div class="card-body">
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <span style="font-size:19px;">Select files:<span><br>
+      {{form.upload}}<br><br>
+      <button type="submit" class="btn btn-warning" style="color:white;background-color:#e2a547;">Upload <span class="fa fa-cloud-upload-alt"></span></button>
+    </form>
+  </div>
+</div>
+
+
+{% endblock %}

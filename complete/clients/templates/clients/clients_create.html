@@ -1,0 +1,29 @@
+{% extends "homepage.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <div class="row justify-content-center">
+        <div class="col-8">
+          <h3 class="mt-2">Add Client</h3>
+          <hr class="mt-0 mb-4">
+
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+      <br>
+    <button type="submit" class="btn btn-success">Add Client</button>
+  </form>
+        </div>
+      </div>
+</div>
+</div>
+
+
+</div>
+
+{% endblock %}

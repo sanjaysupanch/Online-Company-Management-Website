@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en" dir="ltr">
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <link rel="stylesheet" href="{% static 'css/date.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </head>
+  <body>
+    <div class="container">
+
+    <div class="jumbotron">
+
+    <center>
+
+  <main>
+
+      <form action="{% url 'put_calendar:date' %}" method="post" style="position : relative;float : right;">
+        {% csrf_token %}
+        <input type="submit" value="next"  class = "btn btn-dark" >
+      </form>
+
+      <form action="{% url 'put_calendar:date1' %}" method="post" style = "position : relative;float:left;">
+        {% csrf_token %}
+        <input type="submit" value="back"  class = "btn btn-dark">
+      </form>
+
+        <h3>CALENDAR</h3>
+    <div class="calendar">
+         <p>{{ present_year }}</p>
+      <div class="calendar__header">
+        <div>mon</div>
+        <div>tue</div>
+        <div>wed</div>
+        <div>thu</div>
+        <div>fri</div>
+        <div>sat</div>
+        <div>sun</div>
+      </div>
+
+      {% for i,j in zipped_data  %}
+
+      <div class="calendar__week">
+
+        {% if i.0 == j.0.0 and i.0 != 0 %}
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+             {{i.0}}
+             <br>
+             {{j.0.1}}
+           </div>
+          {% elif i.0 == 0 %}
+
+            <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+        {% else %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.0}}</div>
+       {% endif %}
+      {% if i.1 == j.1.0 and i.1 != 0 %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+          {{i.1}}
+          <br>
+          {{j.1.1}}
+        </div>
+        {% elif i.1 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.1}}</div>
+      {% endif %}
+      {% if i.2 == j.2.0 and i.2 != 0  %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+          {{i.2}}
+          <br>
+          {{j.2.1}}
+        </div>
+        {% elif i.2 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.2}}</div>
+      {% endif %}
+      {% if i.3 == j.3.0 and i.3 != 0  %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+           {{i.3}}
+            <br>
+            {{j.3.1}}
+         </div>
+        {% elif i.3 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.3}}</div>
+      {% endif %}
+      {% if i.4 == j.4.0  and i.4 != 0 %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+          {{i.4}}
+          <br>
+          {{j.4.1}}
+        </div>
+        {% elif i.4 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.4}}</div>
+      {% endif %}
+      {% if i.5 == j.5.0 and i.5 != 0  %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+           {{i.5}}
+           <br>
+           {{j.5.1}}
+         </div>
+        {% elif i.5 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.5}}</div>
+      {% endif %}
+      {% if i.6 == j.6.0 and i.6 != 0 %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal" style = "background-color : #5FCD28;">
+           {{i.6}}
+              <br>
+              {{j.6.1}}
+         </div>
+        {% elif i.6 == 0 %}
+
+          <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal"></div>
+      {% else %}
+        <div class="calendar__day day" data-toggle = "modal" data-target = "#myModal">{{i.6}}</div>
+      {% endif %}
+
+      </div>
+      {% endfor %}
+    </div>
+
+  </main>
+
+</center>
+</div>
+
+</div>
+  </body>
+</html>

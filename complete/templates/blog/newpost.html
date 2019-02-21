@@ -1,0 +1,32 @@
+
+{% extends 'blog/base.html' %}
+<style>
+    input
+</style>
+{% block body %}
+    <script type="text/javascript">
+    $(function(){
+
+        $("#id_title").addClass("form-control");
+        $("#id_content").addClass("form-control");
+});
+  </script>
+    <br><br><br>
+
+    <div class="card" style="width: 60%;margin-left: 17%;height:auto;">
+    <div class="card-body">
+        <p class="display-4">Add post</p>
+        <hr>
+    <form method="POST">
+        {% csrf_token %}
+        Title:{{ form.title }}
+
+        Description:
+        {{ form.content }}
+
+        <br><br>
+        <button type="submit" class="btn btn-danger">Post</button>
+    </form>
+    </div>
+            </div>
+{% endblock %}

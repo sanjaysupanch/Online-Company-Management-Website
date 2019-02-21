@@ -1,0 +1,113 @@
+{% extends "baseChat.html" %}
+
+{% block title %}GroupChat{% endblock %}
+{% block header_text %}GroupChat{% endblock %}
+
+{% block content %}
+  <br>    
+    <div id="chats">
+    </div>
+
+{% endblock %}
+
+
+{% block extra_body %}
+    <script>
+        $(function () {
+            // Correctly decide between ws:// and wss://
+            var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+            var ws_path = ws_scheme + '://' + window.location.host + "/chat/stream/";
+            console.log("Connecting to " + ws_path);
+            var socket = new ReconnectingWebSocket(ws_path);
+
+            // Handle incoming messages
+            socket.onmessage = function (message) {
+                // Decode the JSON
+                console.log("Got websocket message " + message.data);
+                var data = JSON.parse(message.data);
+                // Handle errors
+                if (data.error) {
+                    alert(data.error);
+                    return;
+                }
+                // Handle joining
+                if (data.join) {
+                    console.log("Joining room " + data.join);
+                    var roomdiv = $(
+                            "<div class='room' id='room-" + data.join + "'>" +
+                            "<h2>" + data.title + "</h2>" +
+                            "<div class='messages'></div>" +
+                            "<form><input style='width:70%;'><button>Send</button></form>" +
+                            "</div>"
+                    );
+                    // Hook up send button to send a message
+                    roomdiv.find("form").on("submit", function () {
+                        socket.send(JSON.stringify({
+                            "command": "send",
+                            "room": data.join,
+                            "message": roomdiv.find("input").val()
+                        }));
+                        roomdiv.find("input").val("");
+                        return false;
+                    });
+                    $("#chats").append(roomdiv);
+                    // Handle leaving
+                } else if (data.leave) {
+                    console.log("Leaving room " + data.leave);
+                    $("#room-" + data.leave).remove();
+                    // Handle getting a message
+                } else if (data.message || data.msg_type != 0) {
+                    var msgdiv = $("#room-" + data.room + " .messages");
+                    var ok_msg = "";
+
+
+                            // Message
+                            var position ='left'
+                            if(data.me==1) position='right';
+                            console.log(data.me);
+                            ok_msg = "<div class='box' align="+position+">"+
+                                    "<div style='max-width:80%;' class='container' >" +
+                                    "<div class='username'>" + data.username + "</div>" +
+                                    "<p class='body'>" + data.message + "</p>" +
+                                    "</div>"+
+                                    "</div>";
+
+                    msgdiv.append(ok_msg);
+
+                    msgdiv.scrollTop(msgdiv.prop("scrollHeight"));
+                } else {
+                    console.log("Cannot handle message!");
+                }
+            };
+
+            // Says if we joined a room or not by if there's a div for it
+            inRoom = function (roomId) {
+                return $("#room-" + roomId).length > 0;
+            };
+
+            // Room join/leave
+            function initial() {
+                var k;
+                {% for room in rooms%}
+                k={{room.id}};
+                {% endfor %}
+                roomId = k.toString();
+
+                    $(this).addClass("joined");
+                    socket.send(JSON.stringify({
+                        "command": "join",
+                        "room": roomId
+                    }));
+
+            };
+
+            socket.onopen = function () {
+                console.log("Connected to chat socket");
+                initial();
+            };
+            socket.onclose = function () {
+                console.log("Disconnected from chat socket");
+            }
+        });
+    </script>
+{% endblock %}

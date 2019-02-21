@@ -1,0 +1,50 @@
+.list-group-item {
+            background-color: darkgray;
+        }
+
+        .fa {
+            color: white;
+            font-size: 24px;
+            padding: 12px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: gray;
+            text-decoration: none;
+        }
+
+        body {
+            data-spy = "scroll";
+            data-target = ".navbar";
+            data-offset = "50";
+            position: relative;
+        }
+
+        #section1, #section2, #section3, #section4 {
+            padding-top: 50px;
+            padding-left: 40px;
+            padding-right: 40px;
+            height: 500px;
+            color: #fff;
+            border-radius: 25px;
+        }
+
+        #section1 {
+            background-color: #1E88E5;
+        }
+
+        #section2 {
+            background-color: #673ab7;
+        }
+
+        #section3 {
+            background-color: #ff9800;
+        }
+
+        #section4 {
+            background-color: #00bcd4;
+        }

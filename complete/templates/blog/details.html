@@ -1,0 +1,76 @@
+{% extends 'blog/base.html' %}
+{% load  staticfiles %}
+
+{% block head %}
+    <style>
+        a, a:hover {
+            color: #d43e3e;
+            text-decoration: none;
+        }
+    </style>
+{% endblock head %}
+
+{% block body %}
+
+    <br><br><br>
+
+
+    <div class="shadow-lg p-4 mb-4" style="padding: 30px;background-color: #ebebeb;color:#373737;width:85%;margin-left: 7%;">
+        <div class="media">
+            <img src="{% static 'images/default.png' %}" class="align-self-start mr-3 rounded-circle"
+                 style="width:60px">
+            <div class="media-body">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <span class="font-italic"><small> posted by</small></span> {{ posts.author }} <br><span class="font-italic"><small>
+                    {{ posts.timestamp|date:"g:i A, d M, y" }}</small></span>
+
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="text-right">
+                            {% if request.user == posts.author %}
+                        <a class="btn btn-default" href="{% url 'editpost' pk=posts.pk %}"><span
+                                class="fa fa-pencil"></span></a>
+                        <a class="btn btn-default" href="{% url 'deletepost' pk=posts.pk %}"><span
+                                class="fa fa-trash"></span></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <hr style="border-color: #63636394;margin: 0px;width: inherit;">
+                <h1 class="display-4" style="font-size: 37px">{{ posts.title }}</h1>
+                <p style="font-size: large;">{{ posts.content }}</p>
+            </div>
+        </div>
+    <hr style="border-color: #63636394;">
+    <br>
+        <p class="text-left" style="margin-left: inherit;">
+            <a href="{% url 'add-comment' pk=posts.pk %}" class="btn btn-warning btn-sm" role="button"
+               style="border-color: #d43e3e;background-color: #d43e3e;color:white;">Add
+                comment <span class="fa fa-plus-circle"></span></a>
+        </p>
+
+        {% for comment in allcomments %}
+
+            <div class="shadow p-4 mb-4" style="background-color: white;color:black;width: 90%;margin-left:inherit;">
+                <div class="media">
+                    <img src="{% static 'images/default.png' %}" class="align-self-start mr-3 rounded-circle"
+                         style="width:60px">
+                    <div class="media-body">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <h5>{{ comment.author }}:</h5>
+                                <p class="font-weight-normal">{{ comment.content }}</p>
+                            </div>
+                            <div class="col-lg-2">
+                        <span class="font-italic"><small>
+                    {{ posts.timestamp|date:"d M, y  g:i A" }}</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

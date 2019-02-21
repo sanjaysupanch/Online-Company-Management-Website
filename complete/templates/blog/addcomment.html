@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}x
+
+{% block body %}
+    <script type="text/javascript">
+    $(function(){
+
+        $("#id_content").addClass("form-control");
+});
+  </script>
+    <br><br><br>
+    <div class="card" style="width: 60%;height:auto;margin-left: 17%;">
+    <div class="card-body">
+        <p class="display-4">Add comment</p>
+        <hr>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-danger">Send</button>
+    </form>
+    </div>
+    </div>
+{% endblock %}

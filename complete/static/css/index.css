@@ -1,0 +1,8 @@
+        a,a:hover {
+            color: white;
+            text-decoration: none;
+        }
+        #section1, #section2, #section3, #section4 {
+            color: #fff;
+            height:460px;
+        }

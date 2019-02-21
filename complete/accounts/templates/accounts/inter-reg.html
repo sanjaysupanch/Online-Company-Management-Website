@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+
+    <title>Register</title>
+{% endblock %}
+
+{% block body %}
+    <br><br><br>
+    <div class="card" style="width: 60%;height:280px;margin-left:20%;">
+        <div class="card-body">
+            <div class="text-center">
+                <p class="display-4">Do you want to register as a</p><br><br>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href="/accounts/register">
+                            <button type="button" class="btn btn-danger" style="width: 35%">User <span class="fa fa-user"></span></button>
+                        </a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a href="/accounts/register/company">
+                            <button type="button" class="btn btn-primary" style="width: 35%">Company <span class="fas fa-city"></span></button>
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}

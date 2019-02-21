@@ -1,0 +1,54 @@
+{% extends 'homepage.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block head %}
+  <title>USER PROFILE PAGE</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="card">
+<div class="card-body">
+ <div class="container " id="f4">
+   <div class="row">
+    <div class="col-md-6">
+      <h1 class="display-4" style="font-size:35px;font-weight:400;"> User Profile</h1><br>
+      <p> Username : {{user}} </p>
+      <p> First Name: {{user.first_name}} </p>
+      <p> Last Name: {{user.last_name}} </p>
+      <p> Email: {{user.email}} </p>
+      <p> Jobtitle: {{user.userprofile.Jobtitle}} </p>
+      <p> Phone: {{user.userprofile.phone}} </p>
+      <p> Company: {{user.userprofile.company_name}} </p>
+      <p> City: {{user.userprofile.city}} </p>
+    </div>
+    <div class="col-md-5"  >
+
+    <!--    {% if user.userprofile.image %}
+          <img src="{{user.userprofile.images.url}}" alt="profile-pic" style="width:200px;border-radius:50%">
+
+        {% else %}
+
+
+        <p >
+
+          <br><br><br><br><br>&nbsp;&nbsp;&nbsp;
+          <img src="../../static/accounts/images/profile.png"  style="width:200px;border-radius:50%">
+        </p>
+        {% endif %}  -->
+        {% if user.userprofile.image  %}
+    <img src="{{user.userprofile.image.url}}" alt="profile-pic" width="240" style="width:200px;border-radius:50%">
+      {{user.userprofile.image.path}}
+    {% else %}
+    <img src="../../static/accounts/images/profile.png"  style="width:200px;border-radius:50%">
+    {% endif %}
+  </div>
+
+    </div>
+    </div>
+ </div>
+ </div>
+ </div>
+
+{% endblock content %}

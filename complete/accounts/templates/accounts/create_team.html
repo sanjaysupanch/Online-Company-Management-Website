@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+  {% block head %}
+  <title>Create Team </title>
+  {% endblock %}
+
+  {% block body %}
+  <div class="container">
+    <h1>Welcome</h1>
+    <p>
+      you can create team here
+    </p>
+    <h2> Create team  </h2>
+    <form method="post">
+      {% csrf_token %}
+      {{form.as_p}}
+      <button type="submit">Create Group</button>
+    </form>
+  </div>
+  {% endblock %}

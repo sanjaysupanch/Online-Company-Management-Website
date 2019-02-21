@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block head %}
+    <title>REGISTER</title>
+    <style>
+    #grad{
+        background-image: linear-gradient(to top left, #feffa1f2, #fe8585);
+    }
+    a,a:hover{
+        color:#005abb;
+        text-decoration: none;
+    }
+    .md-form{
+        font-size: 20px;
+        color: #383838;
+    }
+    </style>
+{% endblock %}
+
+{% block body %}
+<br><br><br><br>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#id_username").addClass("form-control");
+            $("#id_first_name").addClass("form-control");
+            $("#id_last_name").addClass("form-control");
+            $("#id_password1").addClass("form-control");
+            $("#id_email").addClass("form-control");
+            $("#id_password2").addClass("form-control");
+            $("#id_Jobtitle").addClass("form-control");
+            $("#id_city").addClass("form-control");
+            $("#id_phone").addClass("form-control");
+            $("#id_company_name").addClass("form-control");
+        });
+    </script>
+
+    <!-- Material form register -->
+    <div class="row">
+    <div class="col-lg-8">
+    <div class="card" style="width:580px;margin-left:50px">
+
+        <h5 class="card-header info-color white-text text-center py-4">
+            <strong class="display-4" style="font-size: 40px;">Company registration</strong>
+        </h5>
+
+        <!--Card content-->
+        <div class="card-body px-lg-5 pt-0" id="grad">
+            <br>
+            <!-- Form -->
+            <form method="post" action="{% url 'registercompany' %}" class="text-center" style="color: #757575;">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormFirstName">username</label>
+                            {{ form1.username }}<br>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <!-- First name -->
+                        <div class="md-form">
+                            <label for="materialRegisterFormFirstName">First name</label>
+                            {{ form1.first_name }}<br>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <!-- Last name -->
+                        <div class="md-form">
+                            <label for="materialRegisterFormLastName">Last name</label>
+                            {{ form1.last_name }}<br>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- E-mail -->
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form mt-0">
+                            <label for="materialRegisterFormEmail">E-mail</label>
+                            {{ form1.email }}<br>
+
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormPassword">Password</label>
+                            {{ form1.password1 }}<br>
+
+
+                            <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                                At least 8 characters and 1 digit
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="md-form">
+                    <label for="materialRegisterFormPassword">Repeat password</label>
+                    {{ form1.password2 }}<br>
+
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormPhone">jobtitle</label>
+                            {{ form.Jobtitle }}<br>
+
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormPhone">Company name</label>
+                            {{ form2.company_name }}<br>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormPhone">City</label>
+                            {{ form.city }}<br>
+
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="md-form">
+                            <label for="materialRegisterFormPhone">Phone number</label>
+                            {{ form.phone }}<br>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Sign up button -->
+                <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">
+                    Register
+                </button>
+
+                <!-- Social register -->
+                <hr>
+            </form>
+            <!-- Form -->
+
+        </div>
+    </div>
+
+    </div>
+    <div class="col-lg-3">
+        <image src="{% static 'images/flatbuilding.png' %}" style="height:auto;width:inherit;alignment: left;"></image>
+    </div>
+    </div>
+    <!-- Material form register -->
+{% endblock %}
