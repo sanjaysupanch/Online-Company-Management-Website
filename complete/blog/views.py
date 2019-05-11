@@ -39,9 +39,8 @@ def newpost(request,pk=3):
             new_post.published_date = timezone.now()
             teaming=teamtable.objects.get(pk=pk)
             print(teaming)
-            newpost.team_details=teaming
+            new_post.team_details=teaming
             new_post.save()
-            post.objects.create(title=title,content=content,author=request.user,team_details=teaming)
             return redirect('/blog/show/'+str(pk)+'/')
     else:
         newform = postform()

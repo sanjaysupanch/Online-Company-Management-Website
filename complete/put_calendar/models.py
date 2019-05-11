@@ -13,4 +13,3 @@ class check_date1(models.Model):
     date = models.DateField()
     work_title = models.CharField(max_length=34)
     team_details=models.ForeignKey(teamtable,default='',on_delete=models.CASCADE)
-

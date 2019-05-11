@@ -4,6 +4,11 @@ from django.utils import timezone
 from .forms import MyTodoform
 
 from django.contrib import messages
+from history.models import recent_activity
+from datetime import datetime
+from django.utils import timezone
+from notifications.models import NotificationList
+from accounts.models import *
 
 # Create your views here.
 
@@ -28,6 +33,17 @@ def update_tasks(request,task_id):
     item = TaskList.objects.get(pk = task_id)
     item.done = True
     item.time_of_submission = timezone.now()
+
+    notify = to_notify.objects.get(work=item.work)
+
+    if item.due_date >= item.time_of_submission.date():
+        message= 'the task you assigned to  '+str(item.user.username)+ ' has completed the task  on time '+str(item.time_of_submission.date())+' successfully.'
+        NotificationList.objects.create(message=message,user=notify.user_notify)
+    elif item.due_date < item.time_of_submission.date():
+        message= 'the task you assigned to  '+str(item.user.username)+ ' has completed the task late on '+str(item.time_of_submission.date())+' successfully.'
+        NotificationList.objects.create(message=message,user=notify.user_notify)
+
+
     item.save()
     return redirect('assignments:display')
 
@@ -51,5 +67,12 @@ def delete_todo(request,todo_id):
 def update_todo(request,todo_id):
     item = MyTodoList.objects.get(pk = todo_id)
     item.done = True
+    recent_activity.objects.create(
+            task_done=item.title,
+            dates=timezone.now().date(),
+            times=timezone.now().time(),
+            user=request.user,
+
+        )
     item.save()
     return redirect('assignments:my_todo')

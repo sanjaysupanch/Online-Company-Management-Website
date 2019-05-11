@@ -29,12 +29,12 @@
                 <tr style="background-color:white;">
                     {% if todo.done == False %}
                         <th  scope="row" style="font-weight: 600">
-                            <i class="fa fa-circle" style="color: red"></i>&nbsp;{{ todo.title }}</th>
+                            <i class="fa fa-circle" style="color: red"></i>&nbsp;<span style="color: black">{{ todo.title }}</span></th>
                     {% elif todo.done %}
                         <th scope="row"style="font-weight: 600">
-                            <i class="fa fa-circle" style="color: green"></i>&nbsp;{{ todo.title }}</th>
+                            <i class="fa fa-circle" style="color: green"></i>&nbsp;<span style="color: black">{{ todo.title }}</span></th>
                     {% endif %}
-                    <td >{{ todo.due_date }}</td>
+                    <td ><span style="color: black">{{ todo.due_date }}</span></td>
                     {% if todo.done == False %}
 
                         <td align="center"><a class="btn btn-primary" href="{% url 'assignments:update_todo' todo.id %}" role="button">

@@ -51,7 +51,3 @@ class UserSerializer(serializers.ModelSerializer):
 			checker123.work_title = checker_data.get('release_date', checker.work_title)
 			checker123.save()
 		return instance
-
-
-
-		

@@ -14,5 +14,5 @@ def index(request):
 def update(request,notify_id):
     item = NotificationList.objects.get(pk = notify_id)
     item.read = True
-    item.save()
+    item.delete()
     return redirect('notifications:index')

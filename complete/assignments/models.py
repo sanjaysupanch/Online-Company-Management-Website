@@ -6,6 +6,9 @@ from notifications.models import *
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from put_calendar.models import check_date
+from history.models import recent_activity
+from datetime import datetime
+from django.utils import timezone
 
 # Create your models here.
 class TaskList(models.Model):
@@ -100,4 +103,26 @@ def add_todo_to_cal(sender,instance,created,**kwargs):
             work_title=instance.title,
             date=instance.due_date,
             user=instance.user
+        )
+
+@receiver(post_save,sender=MyTodoList)
+def add_todo_history(sender,instance,created,updated_fields='done',**kwargs):
+    if updated_fields is 'done':
+        recent_activity.objects.create(
+            task_done=instance.title,
+            dates=timezone.now().date(),
+            times=timezone.now().time(),
+            user=instance.user,
+
+        )
+
+@receiver(post_save,sender=TaskList)
+def add_todo_history(sender,instance,created,updated_fields='done',**kwargs):
+    if updated_fields is 'done':
+        recent_activity.objects.create(
+            task_done=instance.title,
+            dates=timezone.now().date(),
+            times=timezone.now().time(),
+            user=instance.user,
+
         )
