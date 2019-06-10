@@ -7,7 +7,7 @@ cachetools==3.1.0
 channels==2.2.0
 constantly==15.1.0
 daphne==2.3.0
-Django==2.2.1
+Django==2.2.2
 django-crispy-forms==1.7.2
 django-filter==2.1.0
 djangorestframework==3.9.4
