@@ -10,7 +10,7 @@ daphne==2.3.0
 Django==2.2.1
 django-crispy-forms==1.7.2
 django-filter==2.1.0
-djangorestframework==3.9.4
+djangorestframework==3.11.2
 google-api-python-client==1.7.8
 google-auth==1.6.3
 google-auth-httplib2==0.0.3
