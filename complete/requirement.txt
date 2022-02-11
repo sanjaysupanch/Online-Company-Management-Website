@@ -29,7 +29,7 @@ pytz==2019.1
 rsa==4.0
 six==1.12.0
 sqlparse==0.3.0
-Twisted==19.2.0
+Twisted==22.1.0
 txaio==18.8.1
 uritemplate==3.0.0
 zope.interface==4.6.0
